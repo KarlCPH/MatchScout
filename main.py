@@ -1,16 +1,17 @@
-# This is a sample Python script.
+from database import models
+from discord_bot.bot import run_bot
+from fastapi_app import app
+from database import engine
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Initialize the database models and establish the connection
+models.Base.metadata.create_all(bind=engine)
 
+# Start the Discord bot
+# run_bot()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Run the FastAPI application
+# routes.app.run()
+if __name__ == "__main__":
+    import uvicorn
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    uvicorn.run("fastapi_app:app", host="0.0.0.0", port=8000)
